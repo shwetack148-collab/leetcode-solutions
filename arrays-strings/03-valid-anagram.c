@@ -1,0 +1,40 @@
+#include <stdio.h>
+#include <string.h>
+
+int isAnagram(char* s, char* t) {
+    int count[256] = {0};
+
+    for (int i = 0; s[i] != '\0'; i++) {
+        count[(unsigned char)s[i]]++;
+    }
+
+    for (int i = 0; t[i] != '\0'; i++) {
+        count[(unsigned char)t[i]]--;
+    }
+
+    for (int i = 0; i < 256; i++) {
+        if (count[i] != 0) {
+            return 0;
+        }
+    }
+
+    return 1;
+}
+
+int main() {
+    // Test Case 1 - typical case
+    char s1[] = "anagram";
+    char t1[] = "nagaram";
+
+    printf("Test Case 1: %s\n",
+           isAnagram(s1, t1) ? "true" : "false");
+
+    // Test Case 2 - edge case
+    char s2[] = "rat";
+    char t2[] = "car";
+
+    printf("Test Case 2: %s\n",
+           isAnagram(s2, t2) ? "true" : "false");
+
+    return 0;
+}
